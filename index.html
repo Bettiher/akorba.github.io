@@ -180,7 +180,7 @@
 			  var select = d3.select("select#var-list").on("change", varChange);
 			  console.log(select);
 
-			d3.json("https://api.myjson.com/bins/238bj, function(err, map) {    
+			d3.json("https://api.myjson.com/bins/238bj", function(err, map) {    
 
 				var features = arr
 					   .selectAll("path")
