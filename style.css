@@ -1,1 +1,300 @@
-Hello World
+
+/*fond*/
+/* On travaille sur la balise body, donc sur TOUTE la page */
+
+
+#banniere_image{
+    position: center;
+    height : 100%;
+    width : 100%;
+}
+/* l'image occupe toute la place de son bloc conteneur */
+#banniere_image img {
+    width : 100%;
+    height: 20%;
+}
+#banniere_texte{
+	 color: #FFFFFF;
+
+	 position:absolute;
+	 text-align: center;
+	 top:360px; 
+	 width:600px; 
+	 height:400px; 
+	 z-index:2;
+	 font-size:500%;
+}
+body
+{
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    background-color: #f6f6f6; 
+    color: black;  
+	font-family: 'Trebuchet MS', Arial, sans-serif;
+	/*
+	background-image: url("paris.jpg");
+	background-attachment: fixed; 
+    background-repeat: no-repeat;
+    background-position: top;  */
+}
+
+#bloc_page
+{
+    margin: auto;
+}
+
+/*taille et police des paragraphes, titres 1/2/3*/
+
+p,ul
+{	
+    font-size: 20px; /* Paragraphes de 14 pixels */
+	font-family: Calibri;/* Georgia, Impact ,serif; */
+	color: rgb(107,107,107);
+	
+	width: 900px; /* On a indiqué une largeur (obligatoire) */
+    margin: auto; /* On peut donc demander à ce que le bloc soit centré avec auto */
+    text-align: justify;
+    padding: 12px;
+    margin-bottom: 20px;
+	
+}
+
+
+p.introduction
+{	
+	
+	width: 900px; /* On a indiqué une largeur (obligatoire) */
+    margin: auto; /* On peut donc demander à ce que le bloc soit centré avec auto */
+    text-align: center;
+    padding: 12px;
+    margin-bottom: 20px;
+}
+
+
+
+h1
+{
+    font-size: 40px; /* Titres de 40 pixels */
+	font-family: 'Helvetica Neue', Arial, Helvetica, sans-serif, "Helvetica Neue", HelveticaNeue, Arial, sans-serif;
+	font-weight: bold;
+	text-align: center;
+	color: #444444;
+	margin-bottom:50px;
+	
+}
+
+h2
+{
+    font-size: 20px; /* Titres de 40 pixels */
+	font-family: Georgia, Impact,serif;
+	font-weight: normal;
+
+	color: #444444;
+    text-align: center;
+	margin-top: 50px ;
+    margin-bottom: 50px;
+	
+}
+
+h3
+{
+    font-size: 18px; /* Titres de 40 pixels */
+	font-family: Georgia, Impact,serif;
+	font-weight: normal;
+	text-align: center;
+	color: #444444;
+	margin-bottom:50px;
+}
+
+
+/*taille et police des balises strong , em */
+em
+{
+    font-style: normal;
+}
+
+mark
+{
+    background-color: red;
+    color: black;
+}
+
+/* LES IMAGES */
+
+/* comment gérer les images flottantes*/
+/*
+.imageflottante
+{
+    float: left;
+}
+.dessous
+{
+    clear: both;
+}
+*/
+
+div.figure {
+  float: right;
+  width: 100%;
+}
+div.figure p {
+  text-align: center;
+  font-style: italic;
+  font-size: smaller;
+  text-indent: 0;
+}
+
+/* SVG*/
+
+.svg-container1 {
+    display: block;
+    position: relative;
+    width: 30%;
+	margin: 0 auto;
+    padding-bottom: 40%; /* aspect ratio */
+    vertical-align: top;
+    overflow: hidden;
+}
+
+.svg-container2 {
+    display: block;
+    position: relative;
+    width: 70%;
+	margin: 0 auto;
+    padding-bottom: 45%; /* aspect ratio */
+    vertical-align: top;
+    overflow: hidden;
+}
+.svg-content-responsive {
+    display: inline-block;
+    position: absolute;
+    top: 10px;
+    left: 0;
+}
+
+
+
+
+/* BAS DE PAGE*/
+
+div.signature
+{
+	float: right;
+	width: 100%;
+
+}
+div.signature p{
+	text-align:right;
+}
+
+
+/* code betty map */
+
+path {
+  stroke:white;
+  stroke-width: 1px;
+}
+
+
+.legend {
+  font-size: 20px;
+}
+
+div.tooltip {   
+  position: absolute;           
+  text-align: center;           
+  width: 150px;                  
+  height: 25px;                 
+  padding: 2px;             
+  font-size: 10px;     
+  background: #FFFFE0;
+  border: 1px;      
+  border-radius: 8px;           
+  pointer-events: none;         
+}
+
+#var-list {
+
+    left: 10px;
+    top: 30px;
+    margin: auto;
+	text-align: justify;
+
+}        
+
+
+/* blocs*/
+
+#bloc1 {
+	background-color: #FFFFCC; 
+	width: 30%;
+	height:300px;
+	margin-left: 5%;
+	margin-bottom: 5%;
+	float: left;
+
+}
+
+p.bloc1
+{
+	font-size: 20px;
+	width: 900px; /* On a indiqué une largeur (obligatoire) */
+    margin: auto; /* On peut donc demander à ce que le bloc soit centré avec auto */
+}
+ul.bloc1
+{
+	font-size: 20px;
+	width: 900px; /* On a indiqué une largeur (obligatoire) */
+    margin-left: 10px; /* On peut donc demander à ce que le bloc soit centré avec auto */
+}
+
+#bloc2 {
+	background-color: #FFFF99; 
+	width: 55%;
+	height:300px;
+	margin-left: 5%;
+	margin-bottom: 5%;
+	float: left;
+} 
+
+
+
+#bloc3 {
+	background-color: #B8B8B8 ;
+	width: 90%;
+	height:100px;
+	margin-left: 5%;
+	margin-right: 5%;
+	margin-bottom: 5%;
+	float: left;
+
+}
+
+p.bloc3
+{
+	font-size: 20px;
+	width: 900px; /* On a indiqué une largeur (obligatoire) */
+    margin: auto; /* On peut donc demander à ce que le bloc soit centré avec auto */
+}
+
+#bloc4 {
+	background-color: #FFFFFF; 
+	width: 90%;
+	height:600px;
+	margin-left: 5%;
+	margin-right: 5%;
+	margin-bottom: 5%;
+	float: left;
+} 
+
+#exemple3 {
+	width: 90%;
+	height:500px;
+	margin-left: 5%;
+	margin-right: 5%;
+	margin-bottom: 5%;
+	float: left;
+} 
+
