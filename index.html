@@ -1,1 +1,275 @@
-Hello World
+<!DOCTYPE html>
+<html>
+    <head>
+	
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+		<!-- Optional theme -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+
+		<!-- Latest compiled and minified JavaScript -->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+		<title>Les accidents de vélo à Paris</title>
+		<script src="http://d3js.org/d3.v3.min.js"></script>
+		<script src="http://d3js.org/queue.v1.min.js"></script>
+		<script src="http://d3js.org/topojson.v0.min.js"></script>
+        <meta charset="utf-8" />
+		<link rel="stylesheet" href="style.css" />
+		
+		<div id="banniere_image">
+			<img alt="" src="paris.jpg" />
+		</div>
+		 <div id="banniere_texte">
+			<center><b>Les accidents de vélo à Paris</b></center>
+		</div> 
+		
+		
+    </head>
+	
+    <body>
+		<!--<div id="bloc_page">-->
+
+		<header>
+			<h1>Les accidents de vélo à Paris</h1>
+			<!-- c'est ici qu'on met d3.js je pense-->
+			
+		</header>
+		
+		<p class="introduction"><strong>Bonjour et bienvenue</strong> sur notre site !<br />
+		</p>		
+
+		<div id="exemple1">
+		<section>
+			<h2>Première partie</h2>
+			
+			<div id="bloc1">
+			<p class="bloc1">Paris en 2012, c'est : </p>
+			<ul class="bloc1">
+				<li>? accidents</li>
+				<li>? blessés</li>
+			</ul>
+			</div>
+			
+			<div id="bloc2">
+			</div>
+		</section>
+		</div>
+		
+		<script>
+		
+			d3.csv("databetty.csv",function(csv) {
+
+			console.log(csv);
+
+			});
+
+			data = [3,16,3,78]
+			var r = 300;
+			
+			var color = d3.scale.ordinal()
+				.range(["#fdd0a2"," #fdae6b","#fd8d3c", "#e6550d"]);
+			
+			var canvas = d3.select('div#bloc2')
+				.append("div")
+				.classed("svg-container1", true) 
+				.append("svg")
+					.attr("preserveAspectRatio", "xMinYMin meet")
+					.attr("viewBox", "0 0 600 600")
+					//class to make it responsive
+					.classed("svg-content-responsive", true); 
+						
+			var group = canvas.append("g")
+				.attr("transform", "translate(300,300)");
+				
+			var arc = d3.svg.arc()
+				.innerRadius(200)
+				.outerRadius(r)
+				
+			var pie = d3.layout.pie()
+				.value(function(d) {return d; });
+			
+			var arcs = group.selectAll(".arc")
+				.data(pie(data))
+				.enter()
+				.append("g")
+				.attr("class", "arc");
+			
+			arcs.append("path")
+				.attr("d", arc)
+				.attr("fill", function(d, i){return color(i);});
+			
+			arcs.append("text")
+				.attr("transform", function(d) { return "translate("+ arc.centroid(d) +  ")";})
+				.attr("text-anchor", "middle")
+				.attr("font-size","1.5em")
+				.text(function(d) {return d.data;});
+			
+		</script>
+		
+		<div id="exemple2">
+		<section>
+			<h2>Deuxième partie</h2>
+			
+			<div id="bloc3">
+			<p>Blabla2.</p>
+			</div>
+			
+			<div id="bloc4">
+			<select id="var-list">
+				<option value="Acc">Nombre d'accidents</option>
+				<option value="C_AR">Arrondissement</option> 
+			</select>
+			</div>
+		<section>
+		</div>
+
+		<script>
+			// Size of the canvas on which the map will be rendered
+			var width = 1000,  
+				height = 600;
+
+			var color_domain = [15, 25, 40, 60, 100];
+			var ext_color_domain = [0, 15, 25, 40, 60];
+			var legend_labels = ["< 15", "15-25", "25-40", "40-60", ">60"];              
+			var color = d3.scale.threshold()
+			  .domain(color_domain)
+			  .range(["#d9d9d9", "#dadaeb", "#bcbddc", "#9e9ac8", "#756bb1"]);
+			var div = d3.select("body").append("div")   
+			  .attr("class", "tooltip")               
+			  .style("opacity", 0);
+			  
+
+			var svg = d3.select("div#bloc4")
+				.append("div")
+				.classed("svg-container2", true) 
+				.append("svg")
+					.attr("width", width)
+					.attr("height", height)
+					.attr("preserveAspectRatio", "xMidYMid meet")
+					.attr("viewBox", "0 0 1000 2000")
+					//class to make it responsive
+					.classed("svg-content-responsive", true); 
+
+			//   .style("margin", "10px auto");
+
+			var center = [2.3488000, 48.8534100];
+
+			// Instantiate the projection object
+			var projection = d3.geo.mercator()  //conicConformal() 
+				.center(center)
+				//.clipAngle(180)
+				// Size of the map itself, you may want to play around with this in 
+				// relation to your canvas size
+				.scale(300000)
+				// Center the map in the middle of the canvas
+				.translate([width / 2, height / 2])
+				.precision(.1);
+
+			var path = d3.geo.path().projection(projection); 
+
+			var arr = svg
+				.append("g")
+				.attr("id", "arrondissements");
+
+
+			  var varChange = function() {
+				var selectedValue = d3.event.target.value;
+				console.log(selectedValue);
+				}
+			  //var select  = d3.select("#var-list").append("select").on("change", varChange);
+			  var select = d3.select("select#var-list").on("change", varChange);
+			  console.log(select);
+
+			d3.json("https://api.myjson.com/bins/238bj, function(err, map) {    
+
+				var features = arr
+					   .selectAll("path")
+						   .data(map.features);
+			 
+				//var selectedValue = d3.event.target.value;
+				//console.log(varChange);
+				//var colorScale = d3.scale.category20c();
+
+				features.enter()
+				   .append("path")
+					   .attr('class', 'arrondissement')
+					   .attr('fill', function(d) { 
+						   return color(+d.properties.Acc);  //colorScale(+d.properties.Acc);
+					   })
+					   .attr("d", path)
+
+					//Adding mouseevents
+				.on("mouseover", function(d) {
+				  d3.select(this).transition().duration(300).style("opacity", 1);
+				  div.transition().duration(300)
+				  .style("opacity", 1)
+				  div.text(d.properties.L_AR + " : " + d.properties.Acc)
+				  .style("left", (d3.event.pageX) + "px")
+				  .style("top", (d3.event.pageY -30) + "px");
+				})
+				.on("mouseout", function() {
+				  d3.select(this)
+				  .transition().duration(300)
+				  .style("opacity", 0.8);
+				  div.transition().duration(300)
+				  .style("opacity", 0);
+				});
+			//console.log(features);
+
+			});
+
+
+			 //Adding legend for our Choropleth
+
+			  var legend = svg.selectAll("g.legend")
+			  .data(ext_color_domain)
+			  .enter().append("g")
+			  .attr("class", "legend");
+
+			  var ls_w = 40, ls_h = 40;
+
+			  legend.append("rect")
+			  .attr("x", 5)
+			  .attr("y", function(d, i){ return height - (i*ls_h) - 2*ls_h;})
+			  .attr("width", ls_w)
+			  .attr("height", ls_h)
+			  .style("fill", function(d, i) { return color(d); })
+			  .style("opacity", 0.8);
+
+			  legend.append("text")
+			  .attr("x", 50)
+			  .attr("y", function(d, i){ return height - (i*ls_h) - ls_h - 2;})
+			  .text(function(d, i){ return legend_labels[i]; });
+
+		</script>
+		
+		<div id="exemple3">
+		<section>
+			<h2>Troisième partie</h2>
+
+			<p>Blabla3.</p>
+			
+			<p>Connaissez-vous le logiciel Bloc-Notes ? On peut faire des sites web avec !</p>
+
+			<div class="figure">
+			  <p><img src="paris_coupe.jpg">
+			  <p>Test caption
+			</div>
+		<section>
+		</div>
+		
+		<div class="signature">
+			<p>Par Tanguy Foujolschsschshh, Bettina Hermant, et Anna Korba</p>
+		</div>
+
+		
+		
+    </body>
+	
+	<footer>
+    <!-- Placez ici le contenu du pied de page -->
+	</footer>
+	
+</html>
+
+
